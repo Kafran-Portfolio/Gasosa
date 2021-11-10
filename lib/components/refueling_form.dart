@@ -30,19 +30,25 @@ class _RefuelingFormState extends State<RefuelingForm> {
           child: Column(
             children: <Widget>[
               TextFormField(
+                keyboardType: const TextInputType.numberWithOptions(decimal: true), // Ensure decimal on iOS keyboard
                 validator: _shouldNotBeEmpty,
                 decoration: const InputDecoration(labelText: "Valor do combustível (R\$)"),
                 onSaved: (value) => _fuelPrice = value!,
+                textInputAction: TextInputAction.next,
               ),
               TextFormField(
+                keyboardType: const TextInputType.numberWithOptions(decimal: true),
                 validator: _shouldNotBeEmpty,
                 decoration: const InputDecoration(labelText: "Litros abastecidos"),
                 onSaved: (value) => _liters = value!,
+                textInputAction: TextInputAction.next,
               ),
               TextFormField(
+                keyboardType: const TextInputType.numberWithOptions(decimal: true),
                 validator: _shouldNotBeEmpty,
                 decoration: const InputDecoration(labelText: "Quilometragem do veículo"),
                 onSaved: (value) => _odometer = value!,
+                textInputAction: TextInputAction.done,
               ),
               DropdownButtonFormField<Fuel>(
                 onChanged: (value) {},
@@ -63,7 +69,7 @@ class _RefuelingFormState extends State<RefuelingForm> {
                     _formKey.currentState!.save();
                     final newRefueling = Refueling(
                       date: DateTime.now(),
-                      fuel: _fuel as Fuel,
+                      fuel: _fuel,
                       fuelPrice: double.tryParse(_fuelPrice) ?? 0.0,
                       liters: double.tryParse(_liters) ?? 0.0,
                       odometer: double.tryParse(_odometer) ?? 0.0,
@@ -99,5 +105,6 @@ class _RefuelingFormState extends State<RefuelingForm> {
   void _saveRefueling(Refueling refueling) {
     final refuelingBox = Hive.box<Refueling>(GasosaApp.hiveBox);
     refuelingBox.add(refueling);
+    Navigator.of(context).pop();
   }
 }
