@@ -24,9 +24,19 @@ class HomePage extends StatelessWidget {
               ),
             ),
             RefuelingList(),
-            const RefuelingForm(),
+            // const RefuelingForm(),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {
+          showModalBottomSheet(
+              context: context,
+              builder: (BuildContext context) {
+                return const RefuelingForm();
+              });
+        },
       ),
     );
   }

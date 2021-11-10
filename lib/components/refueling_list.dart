@@ -18,7 +18,7 @@ class RefuelingList extends StatelessWidget {
             return const Center(child: Text("No gasosa"));
           }
           return SizedBox(
-            height: 300,
+            height: 500,
             child: ListView.builder(
               itemCount: box.length,
               itemBuilder: (ctx, idx) {
