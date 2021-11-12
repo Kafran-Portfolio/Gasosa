@@ -10,11 +10,22 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Gasosa"),
+        title: Row(
+          children: [
+            Icon(
+              Icons.directions_car_outlined,
+            ),
+            Text(
+              "GásApp",
+              style: Theme.of(context).textTheme.headline6,
+            ),
+          ],
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
+          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             Container(
               child: const Card(
@@ -24,7 +35,6 @@ class HomePage extends StatelessWidget {
               ),
             ),
             RefuelingList(),
-            // const RefuelingForm(),
           ],
         ),
       ),

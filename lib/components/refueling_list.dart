@@ -15,7 +15,28 @@ class RefuelingList extends StatelessWidget {
         valueListenable: Hive.box<Refueling>(GasosaApp.hiveBox).listenable(),
         builder: (ctx, Box<Refueling> box, _) {
           if (box.values.isEmpty) {
-            return const Center(child: Text("No gasosa"));
+            return Center(
+              heightFactor: 2,
+              child: Column(
+                children: [
+                  Text(
+                    "Hey, que tal abastecer?",
+                    style: Theme.of(context).textTheme.headline3,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(16),
+                    constraints: const BoxConstraints.expand(
+                      width: 250,
+                      height: 250,
+                    ),
+                    child: Image.asset(
+                      "assets/images/fuelempty.png",
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                ],
+              ),
+            );
           }
           return SizedBox(
             height: 500,
@@ -37,7 +58,7 @@ class RefuelingList extends StatelessWidget {
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20,
-                                  color: Colors.pink.shade700,
+                                  color: Theme.of(context).primaryColor,
                                 ),
                               ),
                               margin: const EdgeInsets.symmetric(
@@ -46,7 +67,7 @@ class RefuelingList extends StatelessWidget {
                               ),
                               decoration: BoxDecoration(
                                 border: Border.all(
-                                  color: Colors.pink.shade700,
+                                  color: Theme.of(context).colorScheme.primaryVariant,
                                   width: 2,
                                 ),
                               ),
