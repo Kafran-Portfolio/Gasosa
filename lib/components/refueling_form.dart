@@ -56,7 +56,7 @@ class _RefuelingFormState extends State<RefuelingForm> {
                 items: Fuel.values
                     .map((Fuel fuel) => DropdownMenuItem<Fuel>(
                           value: fuel,
-                          child: Text(GasosaApp.fuels[fuel] ?? "NA"),
+                          child: Text(fuel.describe),
                         ))
                     .toList(),
                 value: null,

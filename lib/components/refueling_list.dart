@@ -44,7 +44,6 @@ class RefuelingList extends StatelessWidget {
               itemCount: box.length,
               itemBuilder: (ctx, idx) {
                 final refueling = box.getAt(idx) as Refueling;
-                final fuel = GasosaApp.fuels[refueling.fuel] ?? "NA";
                 return Card(
                   elevation: 5,
                   child: Row(
@@ -77,7 +76,7 @@ class RefuelingList extends StatelessWidget {
                               top: 15,
                               left: 135,
                               child: Text(
-                                fuel,
+                                refueling.fuel.describe,
                                 style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,

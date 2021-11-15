@@ -22,11 +22,6 @@ class GasosaApp extends StatefulWidget {
   const GasosaApp({Key? key}) : super(key: key);
 
   static const hiveBox = 'refueling';
-  static const fuels = <Fuel, String>{
-    Fuel.gasoline: "Gasoline",
-    Fuel.ethanol: "Ethanol",
-    Fuel.diesel: "Diesel",
-  };
 
   @override
   State<GasosaApp> createState() => _GasosaAppState();

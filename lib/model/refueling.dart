@@ -54,3 +54,18 @@ enum Fuel {
   @HiveField(2)
   diesel
 }
+
+extension EnumDescribe on Fuel {
+  String get describe {
+    switch (this) {
+      case Fuel.gasoline:
+        return "Gasoline";
+      case Fuel.ethanol:
+        return "Ethanol";
+      case Fuel.diesel:
+        return "Diesel";
+      default:
+        throw Exception("Unknown Fuel $this");
+    }
+  }
+}
