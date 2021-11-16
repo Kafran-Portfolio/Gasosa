@@ -22,30 +22,37 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Container(
-              child: const Card(
-                color: Colors.blue,
-                child: Text("Gráfico"),
-                elevation: 5,
-              ),
+      body: ListView(
+        scrollDirection: Axis.vertical,
+        // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          Container(
+            child: const Card(
+              color: Colors.blue,
+              child: Text("Gráfico"),
+              elevation: 5,
             ),
-            RefuelingList(),
-          ],
-        ),
+          ),
+          RefuelingList(),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
           showModalBottomSheet(
-              context: context,
-              builder: (BuildContext context) {
-                return const RefuelingForm();
-              });
+            context: context,
+            builder: (BuildContext context) {
+              return const RefuelingForm();
+            },
+            isScrollControlled: true,
+            constraints: const BoxConstraints(maxHeight: 550),
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(10),
+                topRight: Radius.circular(10),
+              ),
+            ),
+          );
         },
       ),
     );
