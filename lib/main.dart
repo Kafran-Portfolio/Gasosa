@@ -77,6 +77,7 @@ class _GasosaAppState extends State<GasosaApp> {
 
   @override
   void dispose() {
+    Hive.box(GasosaApp.hiveBox).compact();
     Hive.close();
     super.dispose();
   }
