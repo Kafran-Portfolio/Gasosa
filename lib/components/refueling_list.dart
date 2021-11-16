@@ -38,14 +38,32 @@ class RefuelingList extends StatelessWidget {
               ),
             );
           }
-          return SizedBox(
-            height: 500,
+          return Padding(
+            padding: const EdgeInsets.all(8),
             child: ListView.builder(
+              physics: NeverScrollableScrollPhysics(),
+              primary: false,
+              shrinkWrap: true,
               itemCount: box.length,
               itemBuilder: (ctx, idx) {
                 final refueling = box.getAt(idx) as Refueling;
                 return Card(
-                  elevation: 5,
+                  margin: idx == box.length - 1
+                      ? const EdgeInsets.only(
+                          top: 4,
+                          right: 4,
+                          left: 4,
+                          bottom: 80,
+                        )
+                      : const EdgeInsets.all(4),
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(4),
+                    side: BorderSide(
+                      color: Colors.grey.shade300,
+                      width: 1,
+                    ),
+                  ),
                   child: Row(
                     children: [
                       Expanded(
@@ -90,6 +108,19 @@ class RefuelingList extends StatelessWidget {
                                 "${refueling.odometer} KM",
                                 style: TextStyle(
                                   color: Colors.grey.shade600,
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              right: 5,
+                              top: 5,
+                              child: IconButton(
+                                onPressed: () {
+                                  box.deleteAt(idx);
+                                },
+                                icon: Icon(
+                                  Icons.delete,
+                                  color: Theme.of(context).primaryColor,
                                 ),
                               ),
                             ),
