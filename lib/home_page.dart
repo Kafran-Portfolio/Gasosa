@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:gasosa/components/chart.dart';
 
+import 'components/autonomy.dart';
 import 'components/refueling_form.dart';
 import 'components/refueling_list.dart';
+import 'components/total_fuel.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -12,32 +15,40 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Row(
           children: [
-            Icon(
+            const Icon(
               Icons.directions_car_outlined,
             ),
+            const SizedBox(width: 5),
             Text(
-              "GásApp",
+              "GasApp",
               style: Theme.of(context).textTheme.headline6,
             ),
           ],
         ),
       ),
-      body: ListView(
-        scrollDirection: Axis.vertical,
-        // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          Container(
-            child: const Card(
-              color: Colors.blue,
-              child: Text("Gráfico"),
-              elevation: 5,
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ListView(
+          scrollDirection: Axis.vertical,
+          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            Chart(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: const <Widget>[
+                TotalFuel(),
+                Autonomy(),
+              ],
             ),
-          ),
-          RefuelingList(),
-        ],
+            RefuelingList(),
+            const SizedBox(
+              height: 80,
+            ),
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
         onPressed: () {
           showModalBottomSheet(
             context: context,

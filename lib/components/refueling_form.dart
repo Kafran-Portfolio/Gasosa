@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gasosa/main.dart';
 import 'package:gasosa/model/refueling.dart';
 import 'package:hive/hive.dart';
+import 'package:intl/intl.dart';
 
 class RefuelingForm extends StatefulWidget {
   const RefuelingForm({Key? key}) : super(key: key);
@@ -18,6 +19,7 @@ class _RefuelingFormState extends State<RefuelingForm> {
   late String _fuelPrice;
   late String _liters;
   late String _odometer;
+  DateTime _date = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +30,11 @@ class _RefuelingFormState extends State<RefuelingForm> {
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               TextFormField(
-                keyboardType: const TextInputType.numberWithOptions(decimal: true), // Ensure decimal on iOS keyboard
+                keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                // Ensure decimal on iOS keyboard
                 validator: _shouldNotBeEmpty,
                 decoration: const InputDecoration(labelText: "Valor do combustível (R\$)"),
                 onSaved: (value) => _fuelPrice = value!,
@@ -63,28 +67,45 @@ class _RefuelingFormState extends State<RefuelingForm> {
                 onSaved: (value) => _fuel = value!,
                 hint: const Text("Combustível"),
               ),
-              ElevatedButton.icon(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    _formKey.currentState!.save();
-                    final newRefueling = Refueling(
-                      date: DateTime.now(),
-                      fuel: _fuel,
-                      fuelPrice: double.tryParse(_fuelPrice) ?? 0.0,
-                      liters: double.tryParse(_liters) ?? 0.0,
-                      odometer: double.tryParse(_odometer) ?? 0.0,
-                    );
-                    _saveRefueling(newRefueling);
-                  }
+              TextButton(
+                child: Text("Data de abastecimento: ${DateFormat('dd/MMM/y').format(_date)}"),
+                onPressed: () async {
+                  DateTime pickedDate = await showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime(2020),
+                        lastDate: DateTime.now(),
+                      ) ??
+                      DateTime.now();
+                  setState(() {
+                    _date = pickedDate;
+                  });
                 },
-                icon: const Icon(Icons.local_gas_station),
-                label: const Text("Abastecer"),
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.pink.shade700,
-                  textStyle: TextStyle(
-                    color: Colors.pink.shade700,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
+              ),
+              Center(
+                child: ElevatedButton.icon(
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      _formKey.currentState!.save();
+                      final newRefueling = Refueling(
+                        date: _date,
+                        fuel: _fuel,
+                        fuelPrice: double.tryParse(_fuelPrice) ?? 0.0,
+                        liters: double.tryParse(_liters) ?? 0.0,
+                        odometer: double.tryParse(_odometer) ?? 0.0,
+                      );
+                      _saveRefueling(newRefueling);
+                    }
+                  },
+                  icon: const Icon(Icons.local_gas_station),
+                  label: const Text("Abastecer"),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.pink.shade700,
+                    textStyle: TextStyle(
+                      color: Colors.pink.shade700,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               )

@@ -65,6 +65,11 @@ class _GasosaAppState extends State<GasosaApp> {
                 fontWeight: FontWeight.w600,
                 color: Colors.pink,
               ),
+              headline5: GoogleFonts.openSans(
+                fontSize: 30.0,
+                fontWeight: FontWeight.w600,
+                color: Colors.black,
+              ),
               headline6: GoogleFonts.openSans(
                 fontSize: 20.0,
                 fontWeight: FontWeight.w600,

@@ -59,9 +59,9 @@ extension EnumDescribe on Fuel {
   String get describe {
     switch (this) {
       case Fuel.gasoline:
-        return "Gasoline";
+        return "Gasolina";
       case Fuel.ethanol:
-        return "Ethanol";
+        return "Etanol";
       case Fuel.diesel:
         return "Diesel";
       default:
