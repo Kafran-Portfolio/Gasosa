@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:gasosa/components/chart_bar.dart';
 import 'package:gasosa/main.dart';
@@ -9,11 +7,10 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
 
 class Chart extends StatelessWidget {
-  Chart({Key? key}) : super(key: key);
+  const Chart({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Random random = Random();
     return ValueListenableBuilder(
       valueListenable: Hive.box<Refueling>(GasosaApp.hiveBox).listenable(),
       builder: (ctx, Box<Refueling> box, _) {

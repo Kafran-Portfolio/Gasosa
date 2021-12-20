@@ -15,7 +15,7 @@ Future<void> main() async {
   Hive.registerAdapter(RefuelingAdapter());
   Hive.registerAdapter(FuelAdapter());
   // GoogleFonts.config.allowRuntimeFetching = false;
-  runApp(GasosaApp());
+  runApp(const GasosaApp());
 }
 
 class GasosaApp extends StatefulWidget {
@@ -35,7 +35,7 @@ class _GasosaAppState extends State<GasosaApp> {
           future: Hive.openBox<Refueling>(GasosaApp.hiveBox),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.hasData) {
-              return HomePage();
+              return const HomePage();
             } else if (snapshot.hasError) {
               return const Icon(Icons.error_outline);
             } else {

@@ -1,4 +1,4 @@
-package net.kafran.gasosa
+package net.kafran.gasapp
 
 import io.flutter.embedding.android.FlutterActivity
 
